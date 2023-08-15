@@ -1,16 +1,11 @@
 package com.humber.laboratorymgntappbackend.controllers;
 
 import com.humber.laboratorymgntappbackend.models.Appointment;
-import com.humber.laboratorymgntappbackend.models.Patient;
 import com.humber.laboratorymgntappbackend.services.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/appointment")
