@@ -4,15 +4,19 @@ import com.humber.laboratorymgntappbackend.models.Patient;
 import com.humber.laboratorymgntappbackend.repositories.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+
+import static org.apache.tomcat.util.http.parser.HttpParser.isNumeric;
 
 @Service
 public class PatientService {
 
     private final PatientRepository patientRepository;
-
     @Autowired
     public PatientService(PatientRepository patientRepository) {
         this.patientRepository = patientRepository;
@@ -39,7 +43,9 @@ public class PatientService {
         return patientRepository.save(existingPatient);
     }
 
-    public Optional<Patient> getPatientById(int patientId) {
-        return patientRepository.findById(patientId);
+    public Patient searchByPatientId(int patientId) {
+        Optional<Patient> patientOptional = patientRepository.findById(patientId);
+        return patientOptional.orElse(null);
     }
+
 }

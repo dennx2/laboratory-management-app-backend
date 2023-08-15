@@ -3,6 +3,7 @@ package com.humber.laboratorymgntappbackend.controllers;
 import com.humber.laboratorymgntappbackend.models.Patient;
 import com.humber.laboratorymgntappbackend.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,9 +25,15 @@ public class PatientController {
         return patientService.getAllPatients();
     }
 
-    @GetMapping("/{patientId}")
-    public Optional<Patient> getPatientById(@PathVariable int patientId) {
-        return patientService.getPatientById(patientId);
+    @GetMapping("/search/patientid/{patientId}")
+    public ResponseEntity<Patient> searchByPatientId(@PathVariable int patientId) {
+        Patient patient = patientService.searchByPatientId(patientId);
+
+        if (patient != null) {
+            return ResponseEntity.ok(patient);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @PostMapping("/add")
